@@ -1,49 +1,62 @@
 import { PageLayout, SharedLayout } from "./quartz/cfg"
 import * as Component from "./quartz/components"
+import { QuartzPluginData } from "./quartz/plugins/vfile"
 
 // components shared across all pages
 export const sharedPageComponents: SharedLayout = {
   head: Component.Head(),
   header: [],
-  afterBody: [],
-  footer: Component.Footer({
-    links: {
-      GitHub: "https://github.com/jackyzha0/quartz",
-      "Discord Community": "https://discord.gg/cRFFHYye7t",
-    },
-  }),
+  afterBody: [
+    Component.TagList(),
+    Component.MobileOnly(
+      Component.RecentNotes({
+        showTags: false,
+        limit: 10,
+        filter: (f: QuartzPluginData) => f.slug != "index",
+      }),
+    ),
+  ],
+  footer: Component.Footer(),
 }
 
 // components for pages that display a single page (e.g. a single note)
 export const defaultContentPageLayout: PageLayout = {
   beforeBody: [
-    Component.ConditionalRender({
-      component: Component.Breadcrumbs(),
-      condition: (page) => page.fileData.slug !== "index",
-    }),
+    Component.MobileOnly(Component.PageTitle()),
     Component.ArticleTitle(),
-    Component.ContentMeta(),
-    Component.TagList(),
+    Component.ContentMeta({ showComma: false }),
   ],
   left: [
-    Component.PageTitle(),
-    Component.MobileOnly(Component.Spacer()),
-    Component.Flex({
-      components: [
-        {
-          Component: Component.Search(),
-          grow: true,
-        },
-        { Component: Component.Darkmode() },
-        { Component: Component.ReaderMode() },
-      ],
-    }),
-    Component.Explorer(),
+    Component.DesktopOnly(Component.PageTitle()),
+
+    // Component.MobileOnly(Component.Spacer()),
+    // Component.DesktopOnly(Component.Flex({
+    //   components: [
+    //     {
+    //       Component: Component.Search(),
+    //       grow: true,
+    //     },
+    //     { Component: Component.Darkmode() },
+    //     { Component: Component.ReaderMode() },
+    //   ],
+    // })),
+    // Component.Explorer(),
   ],
   right: [
-    Component.Graph(),
+    // Component.Graph(),
+    Component.ConditionalRender({
+      component: Component.Conway({ id: "conway-3" }),
+      condition: (page) => page.fileData.slug == "index",
+    }),
     Component.DesktopOnly(Component.TableOfContents()),
     Component.Backlinks(),
+    Component.DesktopOnly(
+      Component.RecentNotes({
+        showTags: false,
+        limit: 10,
+        filter: (f: QuartzPluginData) => f.slug != "index",
+      }),
+    ),
   ],
 }
 
@@ -52,17 +65,17 @@ export const defaultListPageLayout: PageLayout = {
   beforeBody: [Component.Breadcrumbs(), Component.ArticleTitle(), Component.ContentMeta()],
   left: [
     Component.PageTitle(),
-    Component.MobileOnly(Component.Spacer()),
-    Component.Flex({
-      components: [
-        {
-          Component: Component.Search(),
-          grow: true,
-        },
-        { Component: Component.Darkmode() },
-      ],
-    }),
-    Component.Explorer(),
+    // Component.MobileOnly(Component.Spacer()),
+    // Component.Flex({
+    //   components: [
+    //     {
+    //       Component: Component.Search(),
+    //       grow: true,
+    //     },
+    //     { Component: Component.Darkmode() },
+    //   ],
+    // }),
+    // Component.Explorer(),
   ],
   right: [],
 }

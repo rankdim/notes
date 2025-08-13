@@ -97,6 +97,7 @@ export default (() => {
             return resource
           }
         })}
+        <script src={joinSegments(baseDir, "static/conway.js")} type="module" defer></script>
       </head>
     )
   }

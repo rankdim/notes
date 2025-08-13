@@ -1,3 +1,113 @@
 @use "./base.scss";
+@use "./variables.scss" as *;
 
 // put your custom CSS here!
+
+@media all and ($mobile) {
+  body:has(.page-header ~ .hide-title) {
+    .sidebar.left {
+      .page-title {
+        // display: none;
+      }
+    }
+  }
+}
+
+.center > .page-header {
+  &:has(~ .hide-date) {
+    .content-meta {
+      display: none;
+    }
+  }
+  &:has(~ .hide-title) {
+    .article-title {
+      display: none;
+    }
+  }
+}
+
+// links
+
+a {
+  font-weight: $semiBoldWeight;
+  text-decoration: none;
+  transition: color 0.2s ease;
+  color: var(--secondary);
+
+  &:hover {
+    color: var(--tertiary);
+  }
+
+  &.internal {
+    text-decoration: none;
+    background-color: none;
+    padding: 0 0.1rem;
+    border-radius: 5px;
+    line-height: 1.4rem;
+
+    &.broken {
+      color: var(--secondary);
+      opacity: 0.5;
+      transition: opacity 0.2s ease;
+      &:hover {
+        opacity: 0.8;
+      }
+    }
+
+    &:has(> img) {
+      background-color: transparent;
+      border-radius: 0;
+      padding: 0;
+    }
+    &.tag-link {
+      &::before {
+        content: "#";
+      }
+    }
+  }
+
+  &.external .external-icon {
+    height: 1ex;
+    margin: 0 0.15em;
+
+    > path {
+      fill: var(--dark);
+    }
+  }
+}
+
+.conway-container {
+  display: flex;
+  // flex-direction: column;
+}
+
+#conway-3 {
+  max-height: 250px;
+  max-width: 250px;
+}
+
+.page-title a {
+  font-weight: 100;
+}
+
+.article-title {
+  font-size: 48px;
+  font-weight: 300;
+}
+
+.content-meta {
+  flex-direction: column;
+  display: flex;
+  // align-items: self-end;
+  font-size: 12px;
+  font-weight: 300;
+}
+
+.recent-li {
+  margin: 0 !important;
+  font-size: 14px;
+}
+
+.recent-li .meta {
+  font-size: 10px;
+}
