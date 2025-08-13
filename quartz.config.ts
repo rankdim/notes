@@ -9,7 +9,7 @@ const config: QuartzConfig = {
     enablePopovers: true,
     analytics: { provider: 'umami', host: 'https://cloud.umami.is/', websiteId: 'f8ecb3a7-2dfe-43ba-9127-4091e9c98eef' },
     locale: "en-US",
-    baseUrl: "rankdim.github.io",
+    baseUrl: "rankdim.github.io/notes",
     ignorePatterns: ["private", "templates", ".obsidian"],
     defaultDateType: "modified",
     theme: {
