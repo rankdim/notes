@@ -8,13 +8,13 @@ export const sharedPageComponents: SharedLayout = {
   header: [],
   afterBody: [
     Component.TagList(),
-    Component.MobileOnly(
-      Component.RecentNotes({
-        showTags: false,
-        limit: 10,
-        filter: (f: QuartzPluginData) => f.slug != "index",
-      }),
-    ),
+    // Component.MobileOnly(
+    //   Component.RecentNotes({
+    //     showTags: false,
+    //     limit: 10,
+    //     filter: (f: QuartzPluginData) => f.slug != "index",
+    //   }),
+    // ),
   ],
   footer: Component.Footer(),
 }
@@ -50,13 +50,13 @@ export const defaultContentPageLayout: PageLayout = {
     }),
     Component.DesktopOnly(Component.TableOfContents()),
     Component.Backlinks(),
-    Component.DesktopOnly(
-      Component.RecentNotes({
-        showTags: false,
-        limit: 10,
-        filter: (f: QuartzPluginData) => f.slug != "index",
-      }),
-    ),
+    // Component.DesktopOnly(
+    //   Component.RecentNotes({
+    //     showTags: false,
+    //     limit: 10,
+    //     filter: (f: QuartzPluginData) => f.slug != "index",
+    //   }),
+    // ),
   ],
 }
 
